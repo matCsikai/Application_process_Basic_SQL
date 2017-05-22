@@ -3,9 +3,12 @@ import queries
 from flask import Flask, render_template
 app = Flask(__name__)
 
-# @app.route("/")
-#Root root [/]:
-#It shows a list of links which are pointing to specific roots. See the roots below. 
+
+@app.route("/")
+# Root root [/]:
+# It shows a list of links which are pointing to specific roots. See the roots below.
+def homepage():
+    return render_template("homepage.html")
 
 
 @app.route("/mentors")
@@ -70,6 +73,7 @@ def applicants_page():
 def applicants_mentors_page():
     applicants_mentors = queries.applicants_mentors_query()
     return render_template("applicants_mentors.html", applicants_mentors=applicants_mentors)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
