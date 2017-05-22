@@ -8,16 +8,6 @@ app = Flask(__name__)
 #It shows a list of links which are pointing to specific roots. See the roots below. 
 
 
-
-
-
-#Applicants and mentors page [/applicants-and-mentors]
-#On this page you should show the result of a query that returns the first name and the code of the applicants plus the name of the assigned mentor (joining through the applicants_mentors table) ordered by the applicants id column
-#Show all the applicants, even if they have no assigned mentor in the database!
-#In this case use the string 'None' instead of the mentor name
-#columns: applicants.first_name, applicants.application_code, mentor_first_name, mentor_last_name
-
-
 @app.route("/mentors")
 # Mentors and schools page [/mentors]
 # On this page you should show the result of a query that returns the name of the mentors plus the name and country of
@@ -68,6 +58,18 @@ def contacts_page():
 def applicants_page():
     applicants = queries.applicants_query()
     return render_template("applicants.html", applicants=applicants)
+
+
+@app.route("/applicants-and-mentors")
+# Applicants and mentors page [/applicants-and-mentors]
+# On this page you should show the result of a query that returns the first name and the code of the applicants plus the
+# name of the assigned mentor (joining through the applicants_mentors table) ordered by the applicants id column
+# Show all the applicants, even if they have no assigned mentor in the database!
+# In this case use the string 'None' instead of the mentor name
+# columns: applicants.first_name, applicants.application_code, mentor_first_name, mentor_last_name
+def applicants_mentors_page():
+    applicants_mentors = queries.applicants_mentors_query()
+    return render_template("applicants_mentors.html", applicants_mentors=applicants_mentors)
 
 if __name__ == '__main__':
     app.run(debug=True)

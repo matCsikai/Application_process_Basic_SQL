@@ -40,6 +40,7 @@ def mentors_by_country_query():
                         ORDER BY schools.country ASC;""")
     return result
 
+
 def contacts_query():
     # On this page you should show the result of a query that returns the name of the school plus the name of contact person
     # at the school (from the mentors table) ordered by the name of the school
@@ -66,3 +67,17 @@ def applicants_query():
     return result
 
 
+def applicants_mentors_query():
+    # On this page you should show the result of a query that returns the first name and the code of the applicants plus
+    # the name of the assigned mentor (joining through the applicants_mentors table) ordered by the applicants id column
+    # Show all the applicants, even if they have no assigned mentor in the database!
+    # In this case use the string 'None' instead of the mentor name
+    # columns: applicants.first_name, applicants.application_code, mentor_first_name, mentor_last_name
+    result = config.connect("""SELECT applicants.first_name, applicants.application_code, mentors.first_name, mentors.last_name
+                        FROM ((applicants
+                        LEFT JOIN applicants_mentors
+                        ON applicants.id = applicants_mentors.applicant_id)
+                        LEFT JOIN mentors
+                        ON mentors.id = applicants_mentors.mentor_id)
+                        ORDER BY applicants.id ASC;""")
+    return result

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mentors</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body>
+    <h1>Mentors by Country</h1>
+    <table>
+        <tr>
+            <th>First name</th>
+            <th>Aplication code</th>
+            <th>Mentor's first name</th>
+            <th>Mentor's last name</th>
+        </tr>
+        {% for first_name, application_code, first_name, last_name in applicants_mentors %}
+        <tr>
+            <td> {{ first_name }} </td>
+            <td> {{ application_code }} </td>
+            <td> {{ first_name }} </td>
+            <td> {{ last_name }} </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
