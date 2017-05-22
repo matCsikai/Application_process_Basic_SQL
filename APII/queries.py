@@ -52,5 +52,17 @@ def contacts_query():
     return result
 
 
+def applicants_query():
+    # On this page you should show the result of a query that returns the first name and the code of the applicants plus
+    # the creation_date of the application (joining with the applicants_mentors table) ordered by the creation_date in 
+    # descending order BUT only for applications later than 2016-01-01
+    # columns: applicants.first_name, applicants.application_code, applicants_mentors.creation_date
+    result = config.connect("""SELECT applicants.first_name, applicants.application_code, applicants_mentors.creation_date
+                        FROM applicants
+                        JOIN applicants_mentors
+                        ON applicants.id = applicants_mentors.applicant_id
+                        WHERE creation_date > '2016-01-01'
+                        ORDER BY applicants_mentors.creation_date ASC;""")
+    return result
 
 

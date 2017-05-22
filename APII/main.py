@@ -10,10 +10,6 @@ app = Flask(__name__)
 
 
 
-#Applicants page [/applicants]
-#On this page you should show the result of a query that returns the first name and the code of the applicants plus the creation_date of the application (joining with the applicants_mentors table) ordered by the creation_date in descending order
-#BUT only for applications later than 2016-01-01
-#columns: applicants.first_name, applicants.application_code, applicants_mentors.creation_date
 
 #Applicants and mentors page [/applicants-and-mentors]
 #On this page you should show the result of a query that returns the first name and the code of the applicants plus the name of the assigned mentor (joining through the applicants_mentors table) ordered by the applicants id column
@@ -61,6 +57,17 @@ def mentors_by_country_page():
 def contacts_page():
     contacts = queries.contacts_query()
     return render_template("contacts.html", contacts=contacts)
+
+
+@app.route("/applicants")
+# Applicants page [/applicants]
+# On this page you should show the result of a query that returns the first name and the code of the applicants plus the
+# creation_date of the application (joining with the applicants_mentors table) ordered by the creation_date in
+# descending order BUT only for applications later than 2016-01-01
+# columns: applicants.first_name, applicants.application_code, applicants_mentors.creation_date
+def applicants_page():
+    applicants = queries.applicants_query()
+    return render_template("applicants.html", applicants=applicants)
 
 if __name__ == '__main__':
     app.run(debug=True)
