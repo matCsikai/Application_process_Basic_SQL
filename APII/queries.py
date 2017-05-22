@@ -40,4 +40,17 @@ def mentors_by_country_query():
                         ORDER BY schools.country ASC;""")
     return result
 
+def contacts_query():
+    # On this page you should show the result of a query that returns the name of the school plus the name of contact person
+    # at the school (from the mentors table) ordered by the name of the school
+    # columns: schools.name, mentors.first_name, mentors.last_name
+    result = config.connect("""SELECT schools.name, mentors.first_name, mentors.last_name
+                        FROM mentors
+                        RIGHT JOIN schools
+                        ON mentors.id = schools.contact_person
+                        ORDER BY schools.name ASC;""")
+    return result
+
+
+
 

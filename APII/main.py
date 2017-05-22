@@ -9,13 +9,6 @@ app = Flask(__name__)
 
 
 
-#Contacts page [/mentors-by-country]
-#On this page you should show the result of a query that returns the number of the mentors per country ordered by the name of the countries
-#columns: country, count
-
-#Contacts page [/contacts]
-#On this page you should show the result of a query that returns the name of the school plus the name of contact person at the school (from the mentors table) ordered by the name of the school
-#columns: schools.name, mentors.first_name, mentors.last_name
 
 #Applicants page [/applicants]
 #On this page you should show the result of a query that returns the first name and the code of the applicants plus the creation_date of the application (joining with the applicants_mentors table) ordered by the creation_date in descending order
@@ -59,6 +52,15 @@ def mentors_by_country_page():
     mentors_by_country = queries.mentors_by_country_query()
     return render_template("mentors_by_country.html", mentors_by_country=mentors_by_country)
 
+
+@app.route("/contacts")
+# Contacts page [/contacts]
+# On this page you should show the result of a query that returns the name of the school plus the name of contact person
+# at the school (from the mentors table) ordered by the name of the school
+# columns: schools.name, mentors.first_name, mentors.last_name
+def contacts_page():
+    contacts = queries.contacts_query()
+    return render_template("contacts.html", contacts=contacts)
 
 if __name__ == '__main__':
     app.run(debug=True)
