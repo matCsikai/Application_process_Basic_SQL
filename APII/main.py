@@ -1,19 +1,13 @@
-import ui  # User Interface
 import psycopg2
 import queries
 from flask import Flask, render_template
 app = Flask(__name__)
 
+# @app.route("/")
 #Root root [/]:
 #It shows a list of links which are pointing to specific roots. See the roots below. 
 
-#Mentors and schools page [/mentors]
-#On this page you should show the result of a query that returns the name of the mentors plus the name and country of the school (joining with the schools table) ordered by the mentors id column (columns: mentors.first_name, mentors.last_name, schools.name, schools.country). 
 
-#All school page [/all-school]
-#On this page you should show the result of a query that returns the name of the mentors plus the name and country of the school (joining with the schools table) ordered by the mentors id column.
-#BUT include all the schools, even if there's no mentor yet!
-#columns: mentors.first_name, mentors.last_name, schools.name, schools.country
 
 #Contacts page [/mentors-by-country]
 #On this page you should show the result of a query that returns the number of the mentors per country ordered by the name of the countries
@@ -34,18 +28,37 @@ app = Flask(__name__)
 #In this case use the string 'None' instead of the mentor name
 #columns: applicants.first_name, applicants.application_code, mentor_first_name, mentor_last_name
 
-# @app.route("/")
-
 
 @app.route("/mentors")
 # Mentors and schools page [/mentors]
 # On this page you should show the result of a query that returns the name of the mentors plus the name and country of
 # the school (joining with the schools table) ordered by the mentors id column (columns: mentors.first_name,
 # mentors.last_name, schools.name, schools.country).
-
 def mentors_schools_page():
     mentors_schools = queries.mentors_schools_query()
     return render_template("mentors-schools.html", mentors_schools=mentors_schools)
+
+
+@app.route("/all-school")
+# All school page [/all-school]
+# On this page you should show the result of a query that returns the name of the mentors plus the name and country of
+# the school (joining with the schools table) ordered by the mentors id column.
+# BUT include all the schools, even if there's no mentor yet!
+# columns: mentors.first_name, mentors.last_name, schools.name, schools.country
+def all_school_page():
+    all_school = queries.all_schools_query()
+    return render_template("all_school.html", all_school=all_school)
+
+
+@app.route("/mentors-by-country")
+# Contacts page [/mentors-by-country]
+# On this page you should show the result of a query that returns the number of the mentors per country ordered by the
+# name of the countries
+# columns: country, count
+def mentors_by_country_page():
+    mentors_by_country = queries.mentors_by_country_query()
+    return render_template("mentors_by_country.html", mentors_by_country=mentors_by_country)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
