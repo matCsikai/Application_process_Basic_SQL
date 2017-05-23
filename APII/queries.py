@@ -1,6 +1,4 @@
-import psycopg2
 import config
-
 
 
 def mentors_schools_query():

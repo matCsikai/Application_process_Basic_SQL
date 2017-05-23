@@ -1,4 +1,3 @@
-import psycopg2
 import queries
 from flask import Flask, render_template
 app = Flask(__name__)
